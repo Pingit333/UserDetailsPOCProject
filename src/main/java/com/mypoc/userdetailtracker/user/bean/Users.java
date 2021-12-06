@@ -1,6 +1,8 @@
 package com.mypoc.userdetailtracker.user.bean;
 
-import java.util.Date;
+
+
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,29 +13,29 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="User_details")
-public class Users {
+public class Users implements Comparable<Users>{
 	
 	public Users() {
 		
 	}
 	
-	public Users(int id, String name, String surname, int pincode, Date birth_Date, Date date_Of_Joining) {
+	public Users(int id, String name, String surname, int pincode, Date birthDate, Date dateOfJoining) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.pincode = pincode;
-		this.birth_Date = birth_Date;
-		this.date_Of_Joining = date_Of_Joining;
+		this.birthDate = birthDate;
+		this.dateOfJoining = dateOfJoining;
 	}
 	
-	public Users(String name, String surname, int pincode, Date birth_Date, Date date_Of_Joining) {
+	public Users(String name, String surname, int pincode, Date birthDate, Date dateOfJoining) {
 		super();
 		this.name = name;
 		this.surname = surname;
 		this.pincode = pincode;
-		this.birth_Date = birth_Date;
-		this.date_Of_Joining = date_Of_Joining;
+		this.birthDate = birthDate;
+		this.dateOfJoining = dateOfJoining;
 	}
 
 	@Id
@@ -45,10 +47,10 @@ public class Users {
 	private String surname;
 	@Column(name = "PINCODE")
 	private int pincode;
-	@Column(name = "BIRTH_DATE")
-	private Date birth_Date;
-	@Column(name = "DATE_OF_JOINING")
-	private Date date_Of_Joining;
+	@Column(name = "BIRTHDATE",columnDefinition = "DATE")
+	private Date birthDate;
+	@Column(name = "DOJ",columnDefinition = "DATE")
+	private Date dateOfJoining;
 	public int getId() {
 		return id;
 	}
@@ -62,10 +64,10 @@ public class Users {
 		return pincode;
 	}
 	public Date getBirth_Date() {
-		return birth_Date;
+		return birthDate;
 	}
 	public Date getDate_Of_Joining() {
-		return date_Of_Joining;
+		return dateOfJoining;
 	}
 	public void setId(int id) {
 		this.id = id;
@@ -79,11 +81,22 @@ public class Users {
 	public void setPincode(int pincode) {
 		this.pincode = pincode;
 	}
-	public void setBirth_Date(Date birth_Date) {
-		this.birth_Date = birth_Date;
+	public void setBirth_Date(Date birthDate) {
+		this.birthDate = birthDate;
 	}
-	public void setDate_Of_Joining(Date date_Of_Joining) {
-		this.date_Of_Joining = date_Of_Joining;
+	public void setDate_Of_Joining(Date dateOfJoining) {
+		this.dateOfJoining = dateOfJoining;
+	}
+
+	@Override
+	public int compareTo(Users o) {
+		 if (o.getId() > this.getId()) {
+			   return 1;
+			  } else if (o.getId() < this.getId()) {
+			   return -1;
+			  }
+			  return 0;
+			 
 	}
 
 	
