@@ -31,3 +31,4 @@ Working Function :
 2. Able to modify existing  data.
 3. Able to handle Exception.
 4. Able to Respond via Response Entity Manchenism.
+5. Validation contraints added for the various user filed along with Respose Entity message.
