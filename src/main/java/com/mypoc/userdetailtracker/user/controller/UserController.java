@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -51,7 +53,7 @@ public class UserController {
 	// GET ---> URI : /users/name
 	// retriveUserByName(name)
 	@GetMapping("/users/name")
-	public ResponseEntity<List<Users>> retriveUserByName(@RequestParam String name) {
+	public ResponseEntity<List<Users>> retriveUserByName(@Valid @RequestParam String name) {
 		List<Users> user = userRepository.findByName(name);
 		if (user.isEmpty()) {
 			throw new UserNotFoundException("User not found with : name - " + name);
@@ -64,7 +66,7 @@ public class UserController {
 	// GET ---> URI : /users/surname
 	// retriveUserBySurName(name)
 	@GetMapping("/users/surname")
-	public ResponseEntity<List<Users>> retriveUserBySurname(@RequestParam String surname) {
+	public ResponseEntity<List<Users>> retriveUserBySurname(@Valid @RequestParam String surname) {
 		List<Users> user = userRepository.findBySurname(surname);
 		if (user.isEmpty()) {
 			throw new UserNotFoundException("User not found with : surname - " + surname);
@@ -89,7 +91,7 @@ public class UserController {
 	// POST ---> URI : /users
 	// createUsers and send the status response as CREATED
 	@PostMapping("/users")
-	public ResponseEntity<Object> createUser(@RequestBody Users user) {
+	public ResponseEntity<Object> createUser(@Valid @RequestBody Users user) {
 
 		Users createdUser = userRepository.save(user);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest() // return /users
@@ -115,7 +117,7 @@ public class UserController {
 	// PUT ---> URI : /users/{id}
 	// updateUserById(id)
 	@PutMapping("/users/{id}")
-	public ResponseEntity<Users> updateUserById(@PathVariable int id, @RequestBody Users user) {
+	public ResponseEntity<Users> updateUserById(@PathVariable int id, @Valid @RequestBody Users user) {
 		Optional<Users> checkuser = userRepository.findById(id);
 		if (checkuser.isEmpty()) {
 			throw new UserNotFoundException("User not found with : id - " + id);

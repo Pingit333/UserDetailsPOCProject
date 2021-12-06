@@ -2,7 +2,9 @@ package com.mypoc.userdetailtracker.user.bean;
 
 
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,10 +12,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Table(name="User_details")
-public class Users implements Comparable<Users>{
+public class Users{
 	
 	public Users() {
 		
@@ -39,18 +47,37 @@ public class Users implements Comparable<Users>{
 	}
 
 	@Id
+	@NotNull
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	@Column(name = "NAME")
+	
+	
+	@Column(name = "NAME" )
+	@Length(min = 3, max = 15)
+	@NotBlank(message = "Name is mandatory")
 	private String name;
+	
 	@Column(name = "SURNAME")
+	@Length(min = 3, max = 15)
+	@NotBlank(message = "Surname is mandatory")
 	private String surname;
+	
+	@NotNull
 	@Column(name = "PINCODE")
+	@Range(min = 100000,max=999999)
 	private int pincode;
-	@Column(name = "BIRTHDATE",columnDefinition = "DATE")
+
+	@NotNull
+	@PastOrPresent
+	@Column(name = "BIRTHDATE")
 	private Date birthDate;
-	@Column(name = "DOJ",columnDefinition = "DATE")
+	
+	@NotNull
+	@PastOrPresent
+	@Column(name = "DOJ")
 	private Date dateOfJoining;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -87,20 +114,5 @@ public class Users implements Comparable<Users>{
 	public void setDate_Of_Joining(Date dateOfJoining) {
 		this.dateOfJoining = dateOfJoining;
 	}
-
-	@Override
-	public int compareTo(Users o) {
-		 if (o.getId() > this.getId()) {
-			   return 1;
-			  } else if (o.getId() < this.getId()) {
-			   return -1;
-			  }
-			  return 0;
-			 
-	}
-
-	
-	
-	
 		
 }
