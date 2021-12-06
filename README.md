@@ -25,6 +25,7 @@ Progress til :12/06/2021
 2. added Custom Exception via controllerAdvice to handle exception as entityResponse.
 3. added PUT menthod for Updating the details of Existing user.
 4. added sort functionaly to sort user data - (By birthdate,By dateOfJoining ,By name, By surname, By Pincode , By ID)
+5. Validation added for the user related fileds.
 
 Working Function :
 1. Able to sort Data on basis on DOJ & Birthdate
