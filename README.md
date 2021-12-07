@@ -12,7 +12,6 @@ Progress til :12/03/2021
 4. UserNotFoundException class for handling the exception.
 
 Woking function :
-
 1.retrive all users details.
 2.retrive one/multiple user details by requestparam(by name, by surname , by pincode).
 3.save/create new data by postman.
@@ -20,7 +19,6 @@ Woking function :
 
 
 Progress til :12/06/2021
-
 1. added ResponseEntity Machenism for all methods.
 2. added Custom Exception via controllerAdvice to handle exception as entityResponse.
 3. added PUT menthod for Updating the details of Existing user.
@@ -33,3 +31,10 @@ Working Function :
 3. Able to handle Exception.
 4. Able to Respond via Response Entity Manchenism.
 5. Validation contraints added for the various user filed along with Respose Entity message.
+
+Progress til :12/06/2021
+1.Update in Rest URLs as per operation based.
+2.added Soft Delete function by adding a boolean tag and bit(1) at database side as column.
+
+Working Function:
+1.able to soft delete the user.
