@@ -38,10 +38,10 @@ public class UserController {
 		return new ResponseEntity<List<Users>>(user, HttpStatus.FOUND);
 	}
 
-	// GET ---> URI : /users/{id}
+	// GET ---> URI : /users/findbyid{id}
 	// retriveUserById(id)
-	@GetMapping("/users/{id}")
-	public ResponseEntity<Users> retriveUserById(@PathVariable int id) {
+	@GetMapping("/users/findbyid")
+	public ResponseEntity<Users> retriveUserById(@RequestParam int id) {
 		Optional<Users> user = userRepository.findById(id);
 		if (user == null) {
 			throw new UserNotFoundException("id - " + id);
@@ -52,7 +52,7 @@ public class UserController {
 
 	// GET ---> URI : /users/name
 	// retriveUserByName(name)
-	@GetMapping("/users/name")
+	@GetMapping("/users/findbyname")
 	public ResponseEntity<List<Users>> retriveUserByName(@Valid @RequestParam String name) {
 		List<Users> user = userRepository.findByName(name);
 		if (user.isEmpty()) {
@@ -65,7 +65,7 @@ public class UserController {
 
 	// GET ---> URI : /users/surname
 	// retriveUserBySurName(name)
-	@GetMapping("/users/surname")
+	@GetMapping("/users/findbysurname")
 	public ResponseEntity<List<Users>> retriveUserBySurname(@Valid @RequestParam String surname) {
 		List<Users> user = userRepository.findBySurname(surname);
 		if (user.isEmpty()) {
@@ -78,7 +78,7 @@ public class UserController {
 
 	// GET ---> URI : /users/pincode
 	// retriveUserBySurName(pincode)
-	@GetMapping("/users/pincode")
+	@GetMapping("/users/findbypincode")
 	public ResponseEntity<List<Users>> retriveUserBySurname(@RequestParam int pincode) {
 		List<Users> user = userRepository.findByPincode(pincode);
 		if (user.isEmpty()) {
@@ -102,9 +102,9 @@ public class UserController {
 	}
 
 	// DELETE ---> URI : /users/{id}
-	// deleteUser
-	@DeleteMapping("/users/{id}")
-	public ResponseEntity<Object> deleteUser(@PathVariable int id) {
+	// harddeleteUser
+	@DeleteMapping("/users/harddeletebyid")
+	public ResponseEntity<Object> hardDeleteUserById(@RequestParam int id) {
 		Optional<Users> user = userRepository.findById(id);
 		if (!user.isEmpty()) {
 			userRepository.deleteById(id);
@@ -114,9 +114,23 @@ public class UserController {
 		}
 	}
 
+	// DELETE ---> URI : /users/{id}
+	// softdeleteUser
+	@DeleteMapping("/users/softdeletebyid")
+	public ResponseEntity<Object> softDeleteUserById(@RequestParam int id) {
+		Optional<Users> user = userRepository.findById(id);
+		if (!user.isEmpty()) {
+			user.get().setDeleted(Boolean.TRUE);
+			userRepository.save(user.get());
+			return ResponseEntity.status(HttpStatus.OK).build();
+		} else {
+			throw new UserNotFoundException("User not found with : id - " + id);
+		}
+	}
+	
 	// PUT ---> URI : /users/{id}
 	// updateUserById(id)
-	@PutMapping("/users/{id}")
+	@PutMapping("/users/updatebyid")
 	public ResponseEntity<Users> updateUserById(@PathVariable int id, @Valid @RequestBody Users user) {
 		Optional<Users> checkuser = userRepository.findById(id);
 		if (checkuser.isEmpty()) {
@@ -125,8 +139,9 @@ public class UserController {
 			checkuser.get().setName(user.getName());
 			checkuser.get().setSurname(user.getSurname());
 			checkuser.get().setPincode(user.getPincode());
-			checkuser.get().setBirth_Date(user.getBirth_Date());
-			checkuser.get().setDate_Of_Joining(user.getDate_Of_Joining());
+			checkuser.get().setBirthDate(user.getBirthDate());
+			checkuser.get().setDateOfJoining(user.getDateOfJoining());
+			checkuser.get().setDeleted(user.isDeleted());
 			userRepository.save(checkuser.get());
 			URI uri = ServletUriComponentsBuilder.fromCurrentRequest() // return /users
 					.path("/{id}") // at place of {id}

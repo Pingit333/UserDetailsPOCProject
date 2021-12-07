@@ -12,5 +12,4 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
 	List<Users> findBySurname(String surname);
 	List<Users> findByPincode(int pincode);
 	Users deleteByPincode(int id);
-	
 }
