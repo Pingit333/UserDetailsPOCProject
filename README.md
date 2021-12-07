@@ -32,7 +32,7 @@ Working Function :
 4. Able to Respond via Response Entity Manchenism.
 5. Validation contraints added for the various user filed along with Respose Entity message.
 
-Progress til :12/06/2021
+Progress til :12/07/2021
 1.Update in Rest URLs as per operation based.
 2.added Soft Delete function by adding a boolean tag and bit(1) at database side as column.
 
