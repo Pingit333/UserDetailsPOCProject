@@ -38,3 +38,12 @@ Progress til :12/07/2021
 
 Working Function:
 1.able to soft delete the user.
+
+Progress till : 12/08/2021
+
+1. Bug Fixes Done.
+2. Code Refactoring Done.
+3. Unit test cases Done.
+
+Working Function:
+1.Unit test case for data as well as function (create,delete,update,modify,fetchall,fetchby{ID,Name,SurName,PinCode,DOB,DOJ},forRecord)test is working.
