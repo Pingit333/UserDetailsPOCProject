@@ -21,7 +21,7 @@ import com.mypoc.userdetailtracker.user.bean.Users;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-class UserControllerJunitTest{
+class UserRepositoryUnitTest{
 
 	@Autowired
 	private UserRepository userRepository;
