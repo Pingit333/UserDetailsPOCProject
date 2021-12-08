@@ -19,6 +19,8 @@ import javax.validation.constraints.PastOrPresent;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="User_details")
 public class Users{
@@ -31,6 +33,7 @@ public class Users{
 			@Length(min = 3, max = 15) @NotBlank(message = "Surname is mandatory") String surname,
 			@NotNull @Range(min = 100000, max = 999999) int pincode, @NotNull @PastOrPresent Date birthDate,
 			@NotNull @PastOrPresent Date dateOfJoining, @NotNull boolean deleted) {
+		super();
 		this.name = name;
 		this.surname = surname;
 		this.pincode = pincode;
@@ -39,20 +42,8 @@ public class Users{
 		this.deleted = deleted;
 	}
 
-	public Users(@NotNull int id, @Length(min = 3, max = 15) @NotBlank(message = "Name is mandatory") String name,
-			@Length(min = 3, max = 15) @NotBlank(message = "Surname is mandatory") String surname,
-			@NotNull @Range(min = 100000, max = 999999) int pincode, @NotNull @PastOrPresent Date birthDate,
-			@NotNull @PastOrPresent Date dateOfJoining, @NotNull boolean deleted) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.surname = surname;
-		this.pincode = pincode;
-		this.birthDate = birthDate;
-		this.dateOfJoining = dateOfJoining;
-		this.deleted = deleted;
-	}
-	
+
+
 	@Id
 	@NotNull
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -76,11 +67,13 @@ public class Users{
 
 	@NotNull
 	@PastOrPresent
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@Column(name = "BIRTHDATE")
 	private Date birthDate;
 	
 	@NotNull
 	@PastOrPresent
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@Column(name = "DOJ")
 	private Date dateOfJoining;
 	
@@ -143,6 +136,14 @@ public class Users{
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
+
+	@Override
+	public String toString() {
+		return "Users [id=" + id + ", name=" + name + ", surname=" + surname + ", pincode=" + pincode + ", birthDate="
+				+ birthDate + ", dateOfJoining=" + dateOfJoining + ", deleted=" + deleted + "]";
+	}
+
+	
 	
 	
 	
