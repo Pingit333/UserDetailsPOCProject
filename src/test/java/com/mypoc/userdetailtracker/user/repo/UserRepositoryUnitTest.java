@@ -1,4 +1,4 @@
-package com.mypoc.userdetailtracker.user.controller;
+package com.mypoc.userdetailtracker.user.repo;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -208,7 +208,7 @@ class UserRepositoryUnitTest{
 		
 		String expected = "[ {\r\n" + "  \"id\" : 7,\r\n" + "  \"name\" : \"Himanshuuu\",\r\n"
 				+ "  \"surname\" : \"Shinde\",\r\n" + "  \"pincode\" : 452011,\r\n"
-				+ "  \"birthDate\" : \"2021-12-08\",\r\n" + "  \"dateOfJoining\" : \"2021-12-08\",\r\n"
+				+ "  \"birthDate\" : \"2021-12-09\",\r\n" + "  \"dateOfJoining\" : \"2021-12-09\",\r\n"
 				+ "  \"deleted\" : true\r\n" + "} ]";
 		assertEquals(expected, result);
 
@@ -234,7 +234,7 @@ class UserRepositoryUnitTest{
 
 		String expected = "[ {\r\n" + "  \"id\" : 9,\r\n" + "  \"name\" : \"Himi\",\r\n"
 				+ "  \"surname\" : \"Shinde\",\r\n" + "  \"pincode\" : 452011,\r\n"
-				+ "  \"birthDate\" : \"2021-12-08\",\r\n" + "  \"dateOfJoining\" : \"2021-12-08\",\r\n"
+				+ "  \"birthDate\" : \"2021-12-09\",\r\n" + "  \"dateOfJoining\" : \"2021-12-09\",\r\n"
 				+ "  \"deleted\" : false\r\n" + "} ]";
 		assertEquals(expected, resultAll);
 	}
