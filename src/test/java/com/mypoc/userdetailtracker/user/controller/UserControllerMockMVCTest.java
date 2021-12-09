@@ -134,9 +134,9 @@ class UserControllerMockMVCTest {
 	      .content(resultAll)
 	      .contentType(MediaType.APPLICATION_JSON)
 	      .accept(MediaType.APPLICATION_JSON))
-	      .andExpect(status().isCreated());
+	      .andExpect(status().isCreated())
+	      .andExpect(content().string(containsString(resultAll)))
+	      .andDo(print());
 	}
 	
-
-	 
 }

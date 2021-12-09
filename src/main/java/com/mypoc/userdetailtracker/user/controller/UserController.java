@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -108,8 +109,8 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
-	@PostMapping("/usersa")
-	public ResponseEntity<Object> createUser(@Valid @RequestBody UsersDTO user) {
+	@PostMapping("/usersnew")
+	public ResponseEntity<Object> createUserNew(@Valid @RequestBody UsersDTO user) {
 		Users cpyuser = new Users();
 		cpyuser.setId(user.getId());
 		cpyuser.setName(user.getName());
@@ -131,10 +132,10 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping("/users")
-	public ResponseEntity<Object> createUserOld(@Valid @RequestBody Users user) {
+	public ResponseEntity<Object> createUser(@Valid @RequestBody Users user) {
 
 		Users createdUser = userRepository.save(user);
-		return new ResponseEntity<>(createdUser,HttpStatus.CREATED); // it will user URI and generate response 201 CREATED
+		return new ResponseEntity<>(user,HttpStatus.CREATED); // it will user URI and generate response 201 CREATED
 	}
 	
 	/**
