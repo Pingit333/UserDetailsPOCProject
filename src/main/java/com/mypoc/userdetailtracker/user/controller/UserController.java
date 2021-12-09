@@ -108,7 +108,7 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
-	@PostMapping("/users")
+	@PostMapping("/usersa")
 	public ResponseEntity<Object> createUser(@Valid @RequestBody UsersDTO user) {
 		Users cpyuser = new Users();
 		cpyuser.setId(user.getId());
@@ -125,7 +125,18 @@ public class UserController {
 				.toUri(); // build URI /users/{id} ----> /users/4
 		return ResponseEntity.created(uri).build(); // it will user URI and generate response 201 CREATED
 	}
+	
+	/**
+	 * @param user
+	 * @return
+	 */
+	@PostMapping("/users")
+	public ResponseEntity<Object> createUserOld(@Valid @RequestBody Users user) {
 
+		Users createdUser = userRepository.save(user);
+		return new ResponseEntity<>(createdUser,HttpStatus.CREATED); // it will user URI and generate response 201 CREATED
+	}
+	
 	/**
 	 * @param id
 	 * @return

@@ -60,15 +60,13 @@ class UserControllerMVCTest {
 	}
 	
 	@Test
-	public void getAllEmployeesAPI() throws Exception 
+	 void getAllEmployeesAPI() throws Exception 
 	{
 	mockMvc.perform( MockMvcRequestBuilders
 		      .get("/users")
 		      .accept(MediaType.APPLICATION_JSON))
 		      .andDo(print())
 		      .andExpect(status().isFound());
-		    //  .andExpect(MockMvcResultMatchers.jsonPath("$.employees").exists())
-		      //.andExpect(MockMvcResultMatchers.jsonPath("$.employees[*].employeeId").isNotEmpty());
 	}
 	
 }
